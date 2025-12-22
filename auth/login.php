@@ -93,7 +93,7 @@ $judul = "Login";
 
                         <form method="POST" action="">
                             <div class="mb-3">
-                                <label for="username" class="form-label">Username / Email</label>
+                                <label for="username" class="form-label">Username</label>
                                 <input type="text" 
                                        class="form-control" 
                                        id="username"
