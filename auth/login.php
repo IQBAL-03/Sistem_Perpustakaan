@@ -121,7 +121,7 @@ $judul = "Login";
                         </form>
                         <div class="text-center mt-3">
                             <small class="text-muted">
-                                © 2025 Perpustakaan Sekolah
+                                © 2025 Perpustakaan Digital
                             </small>
                         </div>
                     </div>
