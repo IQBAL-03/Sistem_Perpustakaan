@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['role'] = $user['role'];
 
-                header("Location: ../barang/index.php?status=login_sukses");
+                header("Location: /sistem-perpus/index.php?status=login_sukses");
                 exit();
             } else {
                 $error = "Password salah !";
@@ -48,7 +48,7 @@ $judul = "Login";
 
 <head>
     <meta charset="UTF-8">
-    <title><?= $judul ?> - Perpustakaan Sekolah</title>
+    <title><?= $judul ?> - Sistem Perpustakaan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -72,7 +72,7 @@ $judul = "Login";
                     <div class="card-body p-4">
                         <div class="text-center mb-4">
                             <i class="bi bi-book-half fs-1 text-primary"></i>
-                            <h4 class="mt-2">Perpustakaan Digital</h4>
+                            <h4 class="mt-2">Sistem Perpustakaan</h4>
                             <p class="text-muted">Silakan login</p>
                         </div>
                         <?php

@@ -9,25 +9,19 @@ if (session_status() == PHP_SESSION_NONE) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?= isset($judul) ? $judul : 'Perpustakaan Digital' ?></title>
+    <title><?= isset($judul) ? $judul : 'Sistem Perpustakaan' ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
         <div class="container">
             <a class="navbar-brand fw-bold" href="/sistem-perpus/index.php">
-                <i class="bi bi-book-half"></i>
-                <?php
-                if (isset($_SESSION['user_id'])) {
-                    echo 'Perpustakaan';
-                }
-                ?>
-            </a>
+                <i class="bi bi-book-half"></i> Sistem Perpustakaan</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -98,5 +92,5 @@ if (session_status() == PHP_SESSION_NONE) {
         </div>
     </nav>
 
-    <div class="content-wrapper">
+    <div class="content-wrapper flex-grow-1">
         <div class="container">
