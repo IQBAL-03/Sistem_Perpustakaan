@@ -10,9 +10,9 @@ if (session_status() == PHP_SESSION_NONE) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= isset($judul) ? $judul : 'Sistem Perpustakaan' ?></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" >
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -29,7 +29,7 @@ if (session_status() == PHP_SESSION_NONE) {
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link active" href="/sistem-perpus/barang/index.php">
-                            <i class="bi bi-speedometer2"></i> Data Barang
+                            <i class="bi bi-journal-bookmark"></i> Data Buku
                         </a>
                     </li>
                     <?php
@@ -45,7 +45,7 @@ if (session_status() == PHP_SESSION_NONE) {
                     <?php endif; ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/sistem-perpus/laporan/stok.php">
-                            <i class="bi bi-journal-bookmark"></i> Laporan Stok Buku
+                            <i class="bi bi-file-earmark-text"></i> Laporan Stok Buku
                         </a>
                     </li>
                     <?php if (isset($_SESSION['user_id'])): ?>

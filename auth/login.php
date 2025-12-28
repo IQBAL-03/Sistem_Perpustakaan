@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['role'] = $user['role'];
 
-                header("Location: /sistem-perpus/index.php?status=login_sukses");
+                header("Location: ../barang/index.php?status=login_sukses");
                 exit();
             } else {
                 $error = "Password salah !";
@@ -65,72 +65,73 @@ $judul = "Login";
 </head>
 
 <body class="d-flex align-items-center justify-content-center">
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-5 col-lg-4">
-                <div class="card shadow login-card">
+
+                <div class="card shadow-lg border-0 login-card">
+
                     <div class="card-body p-4">
+
                         <div class="text-center mb-4">
                             <i class="bi bi-book-half fs-1 text-primary"></i>
-                            <h4 class="mt-2">Sistem Perpustakaan</h4>
-                            <p class="text-muted">Silakan login</p>
+                            <h4 class="mt-2 fw-bold">Sistem Perpustakaan</h4>
+                            <p class="text-muted mb-0">Silakan login untuk melanjutkan</p>
                         </div>
+
                         <?php
-                        if (isset($_GET['status']) && $_GET['status'] == 'logout_sukses'){
-                            echo '<div class="alert alert-succes">Anda berhasil logout.</div>';
+                        if (isset($_GET['status']) && $_GET['status'] == 'logout_sukses') {
+                            echo '<div class="alert alert-warning">Anda berhasil logout.</div>';
                         }
 
-                        if (isset($_GET['pesan']) && $_GET['pesan'] == 'belum_login'){
+                        if (isset($_GET['pesan']) && $_GET['pesan'] == 'belum_login') {
                             echo '<div class="alert alert-warning">Anda harus login terlebih dahulu.</div>';
                         }
                         ?>
 
                         <?php if (!empty($error)): ?>
-                            <div class="alert alert-danger">
-                                <i class="fas fa-exclamation-triangle"></i> <?= htmlspecialchars($error) ?>
+                            <div class="alert alert-danger text-center">
+                                <?= htmlspecialchars($error) ?>
                             </div>
                         <?php endif; ?>
 
-                        <form method="POST" action="">
+                        <form method="POST">
                             <div class="mb-3">
-                                <label for="username" class="form-label">Username</label>
-                                <input type="text" 
-                                       class="form-control" 
-                                       id="username"
-                                       name="username"
-                                       placeholder="Masukkan username"
-                                       value="<?= isset($username) ? htmlspecialchars($username) : '' ?>"
-                                       required
-                                       autofocus>
+                                <label class="form-label">Username</label>
+                                <input type="text" name="username" class="form-control" placeholder="Masukkan username"
+                                    required>
                             </div>
 
                             <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" 
-                                       class="form-control"
-                                       id="password"
-                                       name="password" 
-                                       placeholder="Masukkan password"
-                                       required>
+                                <label class="form-label">Password</label>
+                                <input type="password" name="password" class="form-control"
+                                    placeholder="Masukkan password" required>
                             </div>
-                            <div class="d-grid">
+
+                            <div class="d-grid mt-4">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="bi bi-box-arrow-in-right"></i> Login
                                 </button>
                             </div>
                         </form>
-                        <div class="text-center mt-3">
-                            <small class="text-muted">
-                                © 2025 Perpustakaan Digital
-                            </small>
-                        </div>
+
                     </div>
+
+                    <div class="card-footer text-center bg-light">
+                        <a href="../index.php" class="text-decoration-none text-secondary">
+                            <i class="bi bi-house-door"></i> Kembali ke Beranda
+                        </a>
+                    </div>
+
                 </div>
+
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
+
 
 </html>
 
