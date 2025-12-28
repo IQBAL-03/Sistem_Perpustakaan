@@ -118,8 +118,8 @@ $judul = "Login";
 
                     </div>
 
-                    <div class="card-footer text-center bg-light">
-                        <a href="../index.php" class="text-decoration-none text-secondary">
+                    <div class="card-footer text-center text-muted">
+                        <a href="../index.php" class="text-decoration-none">
                             <i class="bi bi-house-door"></i> Kembali ke Beranda
                         </a>
                     </div>

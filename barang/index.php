@@ -71,7 +71,7 @@ require_once '../partials/header.php';
                             while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
                                 <tr>
-                                    <td><?= $no ?></td>
+                                    <td><?= $no++ ?></td>
                                     <td><?= htmlspecialchars($row['kode_buku']) ?></td>
                                     <td><?= htmlspecialchars($row['judul_buku']) ?></td>
                                     <td><?= htmlspecialchars($row['penulis']) ?></td>
