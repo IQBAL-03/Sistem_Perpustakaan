@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stok = (int) $_POST['stok'];
     $status = trim($_POST['status']);
 
-    $error = [];
+    $errors = [];
 
     if (empty($kode_buku)) {
         $errors[] = "Kode buku Tidak Boleh Kosong";
@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty($stok)) {
-        $errors[] = "stok Tidak Boleh Kosong";
+        $errors[] = "Stok Tidak Boleh Kosong";
     }
 
     if (empty($status)) {
@@ -84,18 +84,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 require_once '../partials/header.php';
 ?>
 
-
-<?php if (!empty($errors)): ?>
-    <div class="alert alert-danger">
-        <ul class="mb-0">
-            <?php foreach ($errors as $error): ?>
-                <li><?= htmlspecialchars($error) ?></li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
-<?php endif; ?>
-
-
 <div class="container my-5 pt-5">
     <div class="row w-100 justify-content-center">
         <div class="col-md-8 col-lg-6">
@@ -106,43 +94,52 @@ require_once '../partials/header.php';
                     </h5>
                 </div>
                 <div class="card-body">
+                    <?php if (!empty($errors)): ?>
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
+                                <?php foreach ($errors as $error): ?>
+                                    <li><?= htmlspecialchars($error) ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    <?php endif; ?>
                     <form method="POST">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label">Kode Buku</label>
                                 <input type="text" name="kode_buku" class="form-control"
-                                    value="<?= htmlspecialchars($kode_buku) ?>" required>
+                                    value="<?= htmlspecialchars($kode_buku) ?>">
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Judul Buku</label>
                                 <input type="text" name="judul_buku" class="form-control"
-                                    value="<?= htmlspecialchars($judul_buku) ?>" required>
+                                    value="<?= htmlspecialchars($judul_buku) ?>">
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Penulis</label>
                                 <input type="text" name="penulis" class="form-control"
-                                    value="<?= htmlspecialchars($penulis) ?>" required>
+                                    value="<?= htmlspecialchars($penulis) ?>">
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Penerbit</label>
                                 <input type="text" name="penerbit" class="form-control"
-                                    value="<?= htmlspecialchars($penerbit) ?>" required>
+                                    value="<?= htmlspecialchars($penerbit) ?>">
                             </div>
 
                             <div class="col-md-4">
                                 <label class="form-label">Tahun</label>
                                 <input type="number" name="tahun" class="form-control"
-                                    value="<?= htmlspecialchars($tahun) ?>" required>
+                                    value="<?= htmlspecialchars($tahun) ?>">
                             </div>
 
                             <div class="col-md-4">
                                 <label class="form-label">Stok</label>
                                 <input type="number" name="stok" class="form-control"
-                                    value="<?= htmlspecialchars($stok) ?>" required>
+                                    value="<?= htmlspecialchars($stok) ?>">
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label">Status</label>
-                                <select name="status" class="form-select" required>
+                                <select name="status" class="form-select">
                                     <option value="">-- Pilih --</option>
                                     <option value="tersedia" <?= $status == 'tersedia' ? 'selected' : '' ?>>
                                         Tersedia
