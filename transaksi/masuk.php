@@ -109,7 +109,7 @@ if (!isset($tanggal_dikembalikan)) {
 require_once '../partials/header.php';
 ?>
 
-<div class="container my-5 pt-5">
+<div class="container my-5 pt-7">
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-6">
 
