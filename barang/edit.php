@@ -23,8 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $judul_buku = trim($_POST['judul_buku']);
     $penulis = trim($_POST['penulis']);
     $penerbit = trim($_POST['penerbit']);
-    $tahun = (int) $_POST['tahun'];
-    $stok = (int) $_POST['stok'];
+    $tahun = intval( $_POST['tahun']);
+    $stok = intval( $_POST['stok']);
     $status = trim($_POST['status']);
 
     $errors = [];
@@ -151,7 +151,7 @@ require_once '../partials/header.php';
                             </div>
                         </div>
                         <div class="d-flex justify-content-between mt-4">
-                            <a href="index.php" class="btn btn-secondary">
+                            <a href="../dashboard/index.php" class="btn btn-secondary">
                                 <i class="bi bi-arrow-left"></i> Batal
                             </a>
                             <button type="submit" class="btn btn-primary">

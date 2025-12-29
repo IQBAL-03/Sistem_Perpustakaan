@@ -8,8 +8,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $judul_buku = trim($_POST['judul_buku']);
     $penulis = trim($_POST['penulis']);
     $penerbit = trim($_POST['penerbit']);
-    $tahun = (int) $_POST['tahun'];
-    $stok = (int) $_POST['stok'];
+    $tahun = intval($_POST['tahun']);
+    $stok = intval($_POST['stok']);
     $status = trim($_POST['status']);
 
     $errors = [];
