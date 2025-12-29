@@ -11,7 +11,7 @@ $nama_buku_sukses = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $judul_buku = trim($_POST["judul_buku"]);
     $nama_pengguna = trim($_POST['nama_pengguna']);
-    $tanggal_pinjam = trim($_POST['tanggal-pinjam']);
+    $tanggal_pinjam = trim($_POST['tanggal_pinjam']);
     $tanggal_dikembalikan = trim($_POST['tanggal_dikembalikan']);
     $keterlambatan = trim($_POST['keterlambatan']);
     $denda = trim($_POST['denda']);
@@ -171,7 +171,7 @@ require_once '../partials/header.php';
                                 <input type="date" 
                                 class="form-control"
                                 id="tanggal_pinjam"
-                                name="tanggal-pinjam"
+                                name="tanggal_pinjam"
                                 value="<?= isset($tanggal_pinjam) ? htmlspecialchars($tanggal_pinjam) : ''?>"
                                 required>
                             </div>
