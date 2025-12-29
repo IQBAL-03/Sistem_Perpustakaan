@@ -57,12 +57,12 @@ if (session_status() == PHP_SESSION_NONE) {
                             <ul class="dropdown-menu">
                                 <li>
                                     <a class="dropdown-item" href="/sistem-perpus/transaksi/masuk.php">
-                                        <i class="fas fa-arrow-up text-success"></i> Barang Masuk
+                                        <i class="fas fa-arrow-up text-success"></i> Pengembalian
                                     </a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="/sistem-perpus/transaksi/keluar.php">
-                                        <i class="fas fa-arrow-up text-danger"></i> Barang Keluar
+                                        <i class="fas fa-arrow-up text-danger"></i> Peminjaman
                                     </a>
                                 </li>
                             </ul>

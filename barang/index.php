@@ -33,9 +33,7 @@ require_once '../partials/header.php';
             echo '<div class="alert alert-info">Data Buku Berhasil Diperbarui !</div>';
         } elseif ($_GET['status'] == 'sukses_hapus') {
             echo '<div class="alert alert-warning">Buku Berhasil Dihapus !</div>';
-        } elseif ($_GET['status'] == 'login_sukses') {
-            echo '<div class="alert alert-success">Selamat datang, ' . htmlspecialchars($_SESSION['nama']) . ' !</div>';
-        }
+        } 
     }
     ?>
 

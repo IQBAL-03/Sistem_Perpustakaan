@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['role'] = $user['role'];
 
-                header("Location: ../barang/index.php?status=login_sukses");
+                header("Location: ../dashboard/index.php?status=login_sukses");
                 exit();
             } else {
                 $error = "Password salah !";
