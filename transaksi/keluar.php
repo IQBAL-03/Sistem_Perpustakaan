@@ -1,142 +1,192 @@
 <?php
 require_once '../middleware/cek_login.php';
 require_once '../config/koneksi.php';
-$judul = "Peminjaman";
+
+$judul = "Peminjaman Buku";
 $errors = [];
 $success = false;
-$stok_tersedia = null;
-$jumlah_sukses = 0;
-$nama_barang_sukses = "";
-$stok_setelah_sukses = 0;
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $judul_buku = trim($_POST["judul_buku"]);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $id_buku = intval($_POST['id_buku']);
     $nama_pengguna = trim($_POST['nama_pengguna']);
-    $tanggal_pinjam = trim($_POST['tanggal-pinjam']);
-    $tanggal_dikembalikan = trim($_POST['tanggal_dikembalikan']);
-    $status_peminjaman = trim($_POST['status_pengembalian']);
+    $jumlah = intval($_POST['jumlah']);
+    $tanggal_pinjam = $_POST['tanggal_pinjam'];
+    $tanggal_dikembalikan = $_POST['tanggal_dikembalikan'];
 
-    if (empty($judul_buku)) {
-        $errors[] = "Judul Buku Tidak Boleh Kosong";
+    if ($id_buku <= 0) {
+        $errors[] = "Buku harus dipilih.";
     }
 
-    if (empty($nama_pengguna)) {
-        $errors[] = "Nama Peminjam Tidak Boleh Kosong";
+    if ($nama_pengguna == "") {
+        $errors[] = "Nama peminjam tidak boleh kosong.";
     }
 
-    if (empty($tanggal_pinjam)) {
-        $errors[] = "Tanggal Pinjam Tidak Boleh Kosong";
+    if ($jumlah <= 0) {
+        $errors[] = "Jumlah harus lebih dari 0.";
     }
 
-    if (empty($tanggal_dikembalikan)) {
-        $errors[] = "Tanggal Kembali Tidak Boleh Kosong";
+    if (!$tanggal_pinjam) {
+        $errors[] = "Tanggal pinjam wajib diisi.";
     }
 
-    if(empty($keterlambatan)){
-        $errors[] = "Keterlambatan Tidak Boleh Kosong";
+    if (!$tanggal_dikembalikan) {
+        $errors[] = "Tanggal kembali wajib diisi.";
     }
 
-    if (isset($_POST['denda']) && $_POST['denda'] !== '') {
-        $denda = (int) $_POST['denda'];
+    if (empty($errors)) {
+        $sql = "SELECT judul_buku, stok FROM barang WHERE id = ?";
+        $stmt = mysqli_prepare($koneksi, $sql);
+        mysqli_stmt_bind_param($stmt, "i", $id_buku);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
 
-        if ($denda < 0) {
-            $errors[] = "Denda Tidak Boleh Kurang Dari 0";
+        if (mysqli_num_rows($result) == 0) {
+            $errors[] = "Buku tidak ditemukan.";
+        } else {
+            $buku = mysqli_fetch_assoc($result);
+            $judul_buku = $buku['judul_buku'];
+            $stok = $buku['stok'];
+
+            if ($stok < $jumlah) {
+                $errors[] = "Stok tidak cukup. Stok tersedia: $stok";
+            }
         }
-    } else {
-        $denda = 0;
+        mysqli_stmt_close($stmt);
     }
 
-    if (empty($status_pengembalian)) {
-        $errors[] = "Status Tidak Boleh Kosong";
-    }
+    if (empty($errors)) {
 
+        $sql = "INSERT INTO peminjaman_buku 
+                (id_buku, nama_pengguna, jumlah, tanggal_pinjam, tanggal_dikembalikan)
+                VALUES (?,?,?,?,?)";
+        $stmt = mysqli_prepare($koneksi, $sql);
+        mysqli_stmt_bind_param(
+            $stmt,
+            "isiss",
+            $id_buku,
+            $nama_pengguna,
+            $jumlah,
+            $tanggal_pinjam,
+            $tanggal_dikembalikan
+        );
+
+        if (mysqli_stmt_execute($stmt)) {
+
+            $sql_update = "UPDATE barang SET stok = stok - ? WHERE id = ?";
+            $stmt_update = mysqli_prepare($koneksi, $sql_update);
+            mysqli_stmt_bind_param($stmt_update, "ii", $jumlah, $id_buku);
+            mysqli_stmt_execute($stmt_update);
+            mysqli_stmt_close($stmt_update);
+
+            $success = true;
+        } else {
+            $errors[] = "Gagal menyimpan data.";
+        }
+        mysqli_stmt_close($stmt);
+    }
 }
+
+$sql_buku = "SELECT id, judul_buku FROM barang ORDER BY judul_buku ASC";
+$result_buku = mysqli_query($koneksi, $sql_buku);
+
+$tanggal_pinjam = date('Y-m-d');
+
 require_once '../partials/header.php';
 ?>
 
 <div class="container my-5 pt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6">
-            <div class="card shadow border-0">
-                
-                <!-- Header -->
-                <div class="card-header bg-danger text-white">
-                    <h5 class="mb-0">
-                        <i class="bi bi-journal-plus"></i> Peminjaman Buku
-                    </h5>
+    <div class="card shadow">
+        <div class="card-header bg-danger text-white">
+            <h5>Peminjaman Buku</h5>
+        </div>
+
+        <div class="card-body">
+
+            <?php if ($success): ?>
+                <div class="alert alert-success">
+                    Peminjaman berhasil disimpan.
+                </div>
+            <?php endif; ?>
+
+            <?php if (!empty($errors)): ?>
+                <div class="alert alert-danger">
+                    <ul>
+                        <?php foreach ($errors as $e): ?>
+                            <li><?= $e ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+
+            <form method="POST">
+
+                <div class="mb-3">
+                    <label>Nama Peminjam</label>
+                    <input type="text" name="nama_pengguna" class="form-control" required>
                 </div>
 
-                <!-- Body -->
-                <div class="card-body">
-                    <form method="POST" action="">
+                <div class="mb-3 position-relative">
+                    <label>Judul Buku</label>
+                    <input type="text" id="judul_buku" class="form-control" placeholder="Ketik judul buku..."
+                        autocomplete="off">
+                    <input type="hidden" name="id_buku" id="id_buku" required>
 
-                        <!-- Success Message -->
-                        <div class="alert alert-success d-none" id="success-alert">
-                            <i class="fas fa-check-circle"></i>
-                            <strong>Berhasil!</strong> Peminjaman Buku Dicatat.
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        </div>
-
-                        <!-- Error Message -->
-                        <div class="alert alert-danger d-none" id="error-alert">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <strong>Terjadi Kesalahan:</strong>
-                            <ul class="mb-0 mt-2"></ul>
-                        </div>
-
-                        <!-- Nama Peminjam -->
-                        <div class="mb-3">
-                            <label for="nama_pengguna" class="form-label">Nama Peminjam</label>
-                            <input type="text" class="form-control" id="nama_pengguna" name="nama_pengguna" placeholder="Masukkan nama peminjam" required>
-                        </div>
-
-                        <!-- Judul Buku -->
-                        <div class="mb-3">
-                            <label for="judul_buku" class="form-label">Judul Buku</label>
-                            <input type="text" class="form-control" id="judul_buku" name="judul_buku" placeholder="Masukkan judul buku" required>
-                        </div>
-
-                        <!-- Tanggal Pinjam & Kembali -->
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label for="tanggal_pinjam" class="form-label">Tanggal Pinjam</label>
-                                <input type="date" class="form-control" id="tanggal_pinjam" name="tanggal_pinjam" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="tanggal_kembali" class="form-label">Tanggal Kembali</label>
-                                <input type="date" class="form-control" id="tanggal_kembali" name="tanggal_kembali" required>
-                            </div>
-                        </div>
-
-                        <!-- Status Peminjaman -->
-                        <div class="mt-3">
-                            <label class="form-label">Status Peminjaman</label>
-                            <select class="form-select" name="status_peminjaman" required>
-                                <option value="">-- Pilih Status --</option>
-                                <option value="dipinjam">Dipinjam</option>
-                                <option value="hilang">Hilang</option>
-                                <option value="rusak">Rusak</option>
-                            </select>
-                        </div>
-
-                        <!-- Buttons -->
-                        <div class="d-flex justify-content-between mt-4">
-                            <a href="../dashboard/index.php" class="btn btn-secondary">
-                                <i class="bi bi-arrow-left"></i> Batal
-                            </a>
-                            <button type="submit" class="btn btn-danger">
-                                <i class="bi bi-check-circle"></i> Simpan Peminjaman
-                            </button>
-                        </div>
-
-                    </form>
+                    <div id="hasil_buku" class="list-group position-absolute w-100" style="z-index:1000"></div>
                 </div>
 
-            </div>
+
+                <div class="mb-3">
+                    <label>Jumlah</label>
+                    <input type="number" name="jumlah" min="1" class="form-control" required>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Tanggal Pinjam</label>
+                        <input type="date" name="tanggal_pinjam" value="<?= $tanggal_pinjam ?>" class="form-control"
+                            required>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Tanggal Kembali</label>
+                        <input type="date" name="tanggal_dikembalikan" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="mt-4 d-flex justify-content-between">
+                    <a href="../dashboard/index.php" class="btn btn-secondary">Batal</a>
+                    <button type="submit" class="btn btn-danger">Simpan</button>
+                </div>
+
+            </form>
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('judul_buku').addEventListener('keyup', function () {
+        let keyword = this.value;
+        if (keyword.length < 2) {
+            document.getElementById('hasil_buku').innerHTML = '';
+            return;
+        }
+
+        fetch('../search/cari_buku.php?keyword=' + keyword)
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById('hasil_buku').innerHTML = data;
+            });
+    });
+
+    function pilihBuku(id, judul) {
+        document.getElementById('id_buku').value = id;
+        document.getElementById('judul_buku').value = judul;
+        document.getElementById('hasil_buku').innerHTML = '';
+    }
+</script>
+
+
 <?php
-mysqli_close($koneksi);
 require_once '../partials/footer.php';
+mysqli_close($koneksi);
 ?>
