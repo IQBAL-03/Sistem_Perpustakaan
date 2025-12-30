@@ -96,72 +96,79 @@ require_once '../partials/header.php';
 ?>
 
 <div class="container my-5 pt-5">
-    <div class="card shadow">
-        <div class="card-header bg-danger text-white">
-            <h5>Peminjaman Buku</h5>
-        </div>
-
-        <div class="card-body">
-
-            <?php if ($success): ?>
-                <div class="alert alert-success">
-                    Peminjaman berhasil disimpan.
-                </div>
-            <?php endif; ?>
-
-            <?php if (!empty($errors)): ?>
-                <div class="alert alert-danger">
-                    <ul>
-                        <?php foreach ($errors as $e): ?>
-                            <li><?= $e ?></li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-            <?php endif; ?>
-
-            <form method="POST">
-
-                <div class="mb-3">
-                    <label>Nama Peminjam</label>
-                    <input type="text" name="nama_pengguna" class="form-control" required>
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow border-0">
+                <div class="card-header bg-danger text-white">
+                     <h5 class="mb-0">
+                        <i class="bi bi-arrow-return-left"></i> Peminjaman Buku
+                    </h5>
                 </div>
 
-                <div class="mb-3 position-relative">
-                    <label>Judul Buku</label>
-                    <input type="text" id="judul_buku" class="form-control" placeholder="Ketik judul buku..."
-                        autocomplete="off">
-                    <input type="hidden" name="id_buku" id="id_buku" required>
+                <div class="card-body">
 
-                    <div id="hasil_buku" class="list-group position-absolute w-100" style="z-index:1000"></div>
+                    <?php if ($success): ?>
+                        <div class="alert alert-success">
+                            Peminjaman berhasil disimpan.
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if (!empty($errors)): ?>
+                        <div class="alert alert-danger">
+                            <ul>
+                                <?php foreach ($errors as $e): ?>
+                                    <li><?= $e ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    <?php endif; ?>
+
+                    <form method="POST">
+
+                        <div class="mb-3">
+                            <label>Nama Peminjam</label>
+                            <input type="text" name="nama_pengguna" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3 position-relative">
+                            <label>Judul Buku</label>
+                            <input type="text" id="judul_buku" class="form-control" placeholder="Ketik judul buku..."
+                                autocomplete="off">
+                            <input type="hidden" name="id_buku" id="id_buku" required>
+
+                            <div id="hasil_buku" class="list-group position-absolute w-100" style="z-index:1000"></div>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label>Jumlah</label>
+                            <input type="number" name="jumlah" min="1" class="form-control" required>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Tanggal Pinjam</label>
+                                <input type="date" name="tanggal_pinjam" value="<?= $tanggal_pinjam ?>"
+                                    class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Tanggal Kembali</label>
+                                <input type="date" name="tanggal_dikembalikan" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 d-flex justify-content-between">
+                            <a href="../dashboard/index.php" class="btn btn-secondary">Batal</a>
+                            <button type="submit" class="btn btn-danger">Simpan</button>
+                        </div>
+
+                    </form>
                 </div>
-
-
-                <div class="mb-3">
-                    <label>Jumlah</label>
-                    <input type="number" name="jumlah" min="1" class="form-control" required>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <label>Tanggal Pinjam</label>
-                        <input type="date" name="tanggal_pinjam" value="<?= $tanggal_pinjam ?>" class="form-control"
-                            required>
-                    </div>
-                    <div class="col-md-6">
-                        <label>Tanggal Kembali</label>
-                        <input type="date" name="tanggal_dikembalikan" class="form-control" required>
-                    </div>
-                </div>
-
-                <div class="mt-4 d-flex justify-content-between">
-                    <a href="../dashboard/index.php" class="btn btn-secondary">Batal</a>
-                    <button type="submit" class="btn btn-danger">Simpan</button>
-                </div>
-
-            </form>
+            </div>
         </div>
     </div>
 </div>
+
 
 <script>
     document.getElementById('judul_buku').addEventListener('keyup', function () {
