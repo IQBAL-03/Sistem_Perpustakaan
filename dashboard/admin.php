@@ -10,19 +10,35 @@ $row_total_buku = mysqli_fetch_assoc($result_total_buku);
 $total_buku = $row_total_buku['total'];
 
 $sql_total_stok = "
+   SELECT 
+    SUM(stok_akhir) AS total_stok
+FROM (
     SELECT 
-        SUM(stok_tersedia) AS total_stok
-    FROM (
-        SELECT 
-            b.id,
-            COALESCE((SELECT SUM(jumlah) FROM barang_masuk WHERE id_barang = b.id), 0) - 
-            COALESCE((SELECT SUM(jumlah) FROM barang_keluar WHERE id_barang = b.id), 0) AS stok_tersedia
-        FROM barang b
-    ) AS stok_per_barang
-";
+        b.id,
+        b.stok
+        - GREATEST(
+            COALESCE(p.total_pinjam, 0) - COALESCE(k.total_kembali, 0),
+            0
+        ) AS stok_akhir
+    FROM barang b
+    LEFT JOIN (
+        SELECT id_buku, SUM(jumlah) AS total_pinjam
+        FROM peminjaman_buku
+        WHERE status = 'dipinjam'
+        GROUP BY id_buku
+    ) p ON p.id_buku = b.id
+    LEFT JOIN (
+        SELECT id_buku, SUM(jumlah) AS total_kembali
+        FROM peminjaman_buku
+        WHERE status = 'dikembalikan'
+        GROUP BY id_buku
+    ) k ON k.id_buku = b.id
+) stok_per_barang";
 $result_total_stok = mysqli_query($koneksi, $sql_total_stok);
 $row_total_stok = mysqli_fetch_assoc($result_total_stok);
-$total_stok = $row_total_stok['total_stok'] ?? 0;
+$total_stok = (int) ($row_total_stok['total_stok'] ?? 0);
+
+
 //transaksi
 
 //
@@ -132,56 +148,13 @@ $total_pengguna = $row_total_pengguna['total_pengguna'];
                     <p class="text-muted">
                         Lihat laporan transaksi
                     </p>
-                    <a href="#" class="btn btn-warning text-white">
+                    <a href="../laporan/stok.php" class="btn btn-warning text-white">
                         Lihat Laporan
                     </a>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="card shadow-sm">
-        <div class="card-body">
-            <h5 class="fw-bold mb-3">
-                <i class="bi bi-clock-history"></i> Aktivitas Terbaru
-            </h5>
-
-            <div class="table-responsive">
-                <table class="table table-bordered align-middle">
-                    <thead class="table-light">
-                        <tr>
-                            <th>No</th>
-                            <th>Aktivitas</th>
-                            <th>Pengguna</th>
-                            <th>Tanggal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Menambahkan buku baru</td>
-                            <td>Admin</td>
-                            <td>12-06-2025</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Mengubah data pengguna</td>
-                            <td>Admin</td>
-                            <td>11-06-2025</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Menambah petugas</td>
-                            <td>Admin</td>
-                            <td>10-06-2025</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
-    </div>
-
 </div>
 
 
