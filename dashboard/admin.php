@@ -39,9 +39,17 @@ $row_total_stok = mysqli_fetch_assoc($result_total_stok);
 $total_stok = (int) ($row_total_stok['total_stok'] ?? 0);
 
 
-//transaksi
+$sql_total_peminjaman = "SELECT COUNT(*) AS total FROM peminjaman_buku";
+$result_peminjaman = mysqli_query($koneksi, $sql_total_peminjaman);
+$row_peminjaman = mysqli_fetch_assoc($result_peminjaman);
+$total_peminjaman = (int)$row_peminjaman['total'];
 
-//
+$sql_total_pengembalian = "SELECT COUNT(*) AS total FROM pengembalian_buku";
+$result_pengembalian = mysqli_query($koneksi, $sql_total_pengembalian);
+$row_pengembalian = mysqli_fetch_assoc($result_pengembalian);
+$total_pengembalian = (int)$row_pengembalian['total'];
+
+$total_transaksi = $total_peminjaman + $total_pengembalian;
 
 $sql_total_pengguna = "SELECT COUNT(*) AS total_pengguna FROM pengguna";
 $result_total_pengguna= mysqli_query($koneksi, $sql_total_pengguna);
@@ -89,7 +97,7 @@ $total_pengguna = $row_total_pengguna['total_pengguna'];
                 <div class="card-body d-flex align-items-center">
                     <i class="bi bi-arrow-left-right fs-1 text-warning me-3"></i>
                     <div>
-                        <h5 class="mb-0 fw-bold">48</h5>
+                        <h5 class="mb-0 fw-bold"><?= number_format($total_transaksi)?></h5>
                         <small class="text-muted">Transaksi</small>
                     </div>
                 </div>
