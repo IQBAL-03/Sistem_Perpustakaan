@@ -66,7 +66,7 @@ require_once '../partials/header.php';
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card shadow-sm">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header bg-warning text-white">
                     <h5 class="mb-0"><i class="bi bi-pencil-square"></i> Edit Pengguna</h5>
                 </div>
                 <div class="card-body">
@@ -110,7 +110,7 @@ require_once '../partials/header.php';
 
                         <div class="d-flex justify-content-between mt-4">
                             <a href="index.php" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Kembali</a>
-                            <button type="submit" class="btn btn-primary"><i class="bi bi-check-circle"></i> Simpan Perubahan</button>
+                            <button type="submit" class="btn btn-warning"><i class="bi bi-check-circle"></i> Simpan Perubahan</button>
                         </div>
                     </form>
 

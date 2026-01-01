@@ -14,7 +14,7 @@ $result = mysqli_query($koneksi, $query);
         <h4 class="fw-bold">
             <i class="bi bi-people-fill"></i> Kelola Pengguna
         </h4>
-        <a href="tambah_pengguna.php" class="btn btn-primary">
+        <a href="tambah.php" class="btn btn-primary">
             <i class="bi bi-plus-circle"></i> Tambah Pengguna
         </a>
     </div>
@@ -58,12 +58,12 @@ $result = mysqli_query($koneksi, $query);
                             <td class="text-center">
                                 <a href="edit.php?id=<?= $row['id'] ?>" 
                                    class="btn btn-warning btn-sm">
-                                    <i class="bi bi-pencil-square"></i>
+                                    <i class="bi bi-pencil-square"></i> Edit
                                 </a>
                                 <a href="hapus.php?id=<?= $row['id'] ?>" 
                                    class="btn btn-danger btn-sm"
                                    onclick="return confirm('Yakin hapus pengguna ini?')">
-                                    <i class="bi bi-trash"></i>
+                                    <i class="bi bi-trash"></i> Hapus
                                 </a>
                             </td>
                         </tr>

@@ -151,7 +151,7 @@ require_once '../partials/header.php';
                             </div>
                         </div>
                         <div class="d-flex justify-content-between mt-4">
-                            <a href="../dashboard/index.php" class="btn btn-secondary">
+                            <a href="index.php" class="btn btn-secondary">
                                 <i class="bi bi-arrow-left"></i> Batal
                             </a>
                             <button type="submit" class="btn btn-primary">
