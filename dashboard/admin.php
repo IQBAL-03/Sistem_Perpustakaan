@@ -117,7 +117,7 @@ $total_pengguna = $row_total_pengguna['total_pengguna'];
                     <p class="text-muted">
                         Atur admin dan petugas
                     </p>
-                    <a href="#" class="btn btn-success">
+                    <a href="../Kelola_Pengguna/index.php" class="btn btn-success">
                         Kelola User
                     </a>
                 </div>
