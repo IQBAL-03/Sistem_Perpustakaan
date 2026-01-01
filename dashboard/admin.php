@@ -9,31 +9,7 @@ $result_total_buku = mysqli_query($koneksi, $sql_total_buku);
 $row_total_buku = mysqli_fetch_assoc($result_total_buku);
 $total_buku = $row_total_buku['total'];
 
-$sql_total_stok = "
-   SELECT 
-    SUM(stok_akhir) AS total_stok
-FROM (
-    SELECT 
-        b.id,
-        b.stok
-        - GREATEST(
-            COALESCE(p.total_pinjam, 0) - COALESCE(k.total_kembali, 0),
-            0
-        ) AS stok_akhir
-    FROM barang b
-    LEFT JOIN (
-        SELECT id_buku, SUM(jumlah) AS total_pinjam
-        FROM peminjaman_buku
-        WHERE status = 'dipinjam'
-        GROUP BY id_buku
-    ) p ON p.id_buku = b.id
-    LEFT JOIN (
-        SELECT id_buku, SUM(jumlah) AS total_kembali
-        FROM peminjaman_buku
-        WHERE status = 'dikembalikan'
-        GROUP BY id_buku
-    ) k ON k.id_buku = b.id
-) stok_per_barang";
+$sql_total_stok = "SELECT SUM(stok) AS total_stok FROM barang";
 $result_total_stok = mysqli_query($koneksi, $sql_total_stok);
 $row_total_stok = mysqli_fetch_assoc($result_total_stok);
 $total_stok = (int) ($row_total_stok['total_stok'] ?? 0);
