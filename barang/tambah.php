@@ -69,7 +69,6 @@ require_once '../partials/header.php';
 
             <div class="card shadow">
 
-                <!-- HEADER -->
                 <div class="card-header bg-success text-white">
                     <h5 class="mb-0">
                         <i class="bi bi-plus-square"></i> Tambah Buku Baru
@@ -86,7 +85,6 @@ require_once '../partials/header.php';
                     </div>
                 <?php endif; ?>
 
-                <!-- BODY -->
                 <div class="card-body">
                     <form method="POST" action="">
 
@@ -145,7 +143,6 @@ require_once '../partials/header.php';
 
                         </div>
 
-                        <!-- AKSI -->
                         <div class="d-flex justify-content-between mt-4">
                             <a href="index.php" class="btn btn-secondary">
                                 <i class="bi bi-arrow-left"></i> Batal

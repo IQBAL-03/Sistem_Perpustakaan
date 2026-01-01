@@ -43,7 +43,6 @@ $result_transaksi = mysqli_query($koneksi, $sql_transaksi);
 
 <div class="container my-4">
 
-    <!-- HEADER -->
     <div class="mb-4">
         <h4 class="fw-bold">
             <i class="bi bi-person-workspace"></i> Dashboard Petugas
@@ -53,7 +52,6 @@ $result_transaksi = mysqli_query($koneksi, $sql_transaksi);
         </p>
     </div>
 
-    <!-- KARTU RINGKAS -->
     <div class="row g-3 mb-4">
         <div class="col-md-4">
             <div class="card shadow-sm border-0">
@@ -83,7 +81,6 @@ $result_transaksi = mysqli_query($koneksi, $sql_transaksi);
         </div>
     </div>
 
-    <!-- AKSI CEPAT -->
     <div class="row g-4 mb-5">
         <div class="col-md-6">
             <div class="card border-0 shadow-sm h-100">
@@ -116,7 +113,6 @@ $result_transaksi = mysqli_query($koneksi, $sql_transaksi);
         </div>
     </div>
 
-    <!-- TABEL TRANSAKSI TERBARU -->
     <div class="card shadow-sm border-0">
         <div class="card-body">
             <h6 class="fw-bold mb-3">

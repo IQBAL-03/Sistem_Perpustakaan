@@ -6,7 +6,6 @@ require_once '../partials/header.php';
 
 <div class="container my-5">
 
-    <!-- JUDUL -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h3 class="fw-bold mb-0">
@@ -37,7 +36,6 @@ require_once '../partials/header.php';
     }
     ?>
 
-    <!-- TABEL DATA BUKU -->
     <div class="card shadow-sm border-0">
         <div class="card-body">
 

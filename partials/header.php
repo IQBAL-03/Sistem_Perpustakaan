@@ -17,7 +17,6 @@ if (session_status() == PHP_SESSION_NONE) {
 
 <body class="d-flex flex-column min-vh-100">
 
-    <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
         <div class="container">
             <a class="navbar-brand fw-bold" href="/sistem-perpus/index.php">

@@ -5,10 +5,7 @@ require_once 'partials/header.php';
 
 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
 
-    <!-- Tampilan Admin -->
     <div class="container mt-4">
-
-        <!-- WELCOME CARD -->
         <div class="card shadow-sm mb-4">
             <div class="card-body d-flex align-items-center">
                 <div class="me-4 text-primary">
@@ -25,7 +22,6 @@ require_once 'partials/header.php';
             </div>
         </div>
 
-        <!-- QUICK MENU -->
         <div class="row g-4 mb-4">
 
             <div class="col-md-4">
@@ -72,10 +68,8 @@ require_once 'partials/header.php';
                     </div>
                 </div>
             </div>
-
         </div>
 
-        <!-- INFO SECTION -->
         <div class="card border-0 bg-light">
             <div class="card-body">
                 <h6 class="fw-bold text-primary">
@@ -86,15 +80,10 @@ require_once 'partials/header.php';
                 </p>
             </div>
         </div>
-
     </div>
 
 <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'staff'): ?>
-
-    <!-- Tampilan Petugas -->
     <div class="container my-5">
-
-        <!-- JUDUL -->
         <div class="text-center mb-4">
             <h2 class="fw-bold">
                 <i class="bi bi-clipboard-check"></i> Halaman Petugas
@@ -103,8 +92,6 @@ require_once 'partials/header.php';
                 Mencatat transaksi peminjaman dan pengembalian buku
             </p>
         </div>
-
-        <!-- KARTU AKSI -->
         <div class="row g-4 mb-5">
             <div class="col-md-6">
                 <div class="card shadow-sm border-0">
@@ -136,8 +123,6 @@ require_once 'partials/header.php';
                 </div>
             </div>
         </div>
-
-        <!-- TABEL TRANSAKSI -->
         <div class="card shadow-sm border-0">
             <div class="card-body">
                 <h5 class="fw-bold mb-3">
@@ -192,10 +177,7 @@ require_once 'partials/header.php';
 
 <?php else: ?>
 
-    <!-- Tampilan Umum / Belum Login -->
     <div class="container my-5">
-
-        <!-- HERO -->
         <div class="text-center mb-5">
             <i class="bi bi-book-half text-primary display-1"></i>
             <h1 class="fw-bold mt-3">
@@ -207,7 +189,6 @@ require_once 'partials/header.php';
             </p>
         </div>
 
-        <!-- INFO CARD -->
         <div class="row g-4">
             <div class="col-md-4">
                 <div class="card shadow-sm border-0 h-100 text-center">
