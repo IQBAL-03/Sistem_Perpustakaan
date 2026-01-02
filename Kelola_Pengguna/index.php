@@ -19,6 +19,7 @@ $result = mysqli_query($koneksi, $query);
             <a href="../dashboard/index.php" class="btn btn-secondary">
                 <i class="bi bi-arrow-left"></i> Kembali
             </a>
+            
 
             <a href="tambah.php" class="btn btn-primary">
                 <i class="bi bi-plus-circle"></i> Tambah Pengguna
