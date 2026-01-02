@@ -1,43 +1,51 @@
 <?php
+require_once '../middleware/cek_login.php';
 require_once '../config/koneksi.php';
 $judul = "Dashboard Staff";
 require_once '../partials/header.php';
-$sql_total_peminjaman = "SELECT COUNT(*) AS total FROM peminjaman_buku";
-$result_peminjaman = mysqli_query($koneksi, $sql_total_peminjaman);
-$row_peminjaman = mysqli_fetch_assoc($result_peminjaman);
-$total_peminjaman = (int) $row_peminjaman['total'];
 
-$sql_total_pengembalian = "SELECT COUNT(*) AS total FROM pengembalian_buku";
-$result_pengembalian = mysqli_query($koneksi, $sql_total_pengembalian);
-$row_pengembalian = mysqli_fetch_assoc($result_pengembalian);
-$total_pengembalian = (int) $row_pengembalian['total'];
+// --- 1. HITUNG TRANSAKSI (Menghitung berapa kali kejadian/baris) ---
+// Total berapa kali orang melakukan peminjaman
+$sql_peminjaman_trx = "SELECT COUNT(*) AS total FROM peminjaman_buku";
+$res_peminjaman_trx = mysqli_query($koneksi, $sql_peminjaman_trx);
+$total_peminjaman = (int) (mysqli_fetch_assoc($res_peminjaman_trx)['total'] ?? 0);
 
-$sql_belum_kembali = "
-    SELECT COUNT(*) AS total
+// Total berapa kali orang melakukan pengembalian
+$sql_pengembalian_trx = "SELECT COUNT(*) AS total FROM pengembalian_buku";
+$res_pengembalian_trx = mysqli_query($koneksi, $sql_pengembalian_trx);
+$total_pengembalian = (int) (mysqli_fetch_assoc($res_pengembalian_trx)['total'] ?? 0);
+
+
+// --- 2. HITUNG FISIK BUKU (Logika: Jika sudah kembali, maka tidak dihitung) ---
+// Query ini hanya menjumlahkan kolom 'jumlah' dari buku yang BELUM dikembalikan
+$sql_belum_kembali_fisik = "
+    SELECT SUM(p.jumlah) AS total 
     FROM peminjaman_buku p
-    LEFT JOIN pengembalian_buku k 
-        ON p.id = k.id_peminjaman
-    WHERE k.id IS NULL
+    LEFT JOIN pengembalian_buku k ON p.id = k.id_peminjaman
+    WHERE k.id_peminjaman IS NULL
 ";
-$result_belum_kembali = mysqli_query($koneksi, $sql_belum_kembali);
-$row_belum_kembali = mysqli_fetch_assoc($result_belum_kembali);
-$total_belum_kembali = (int) $row_belum_kembali['total'];
+$res_belum_kembali = mysqli_query($koneksi, $sql_belum_kembali_fisik);
+$row_belum_kembali = mysqli_fetch_assoc($res_belum_kembali);
 
+// Hasil akhirnya: Jika semua transaksi sudah ada pasangannya di tabel kembali, nilainya PASTI 0
+$total_belum_kembali = (int) ($row_belum_kembali['total'] ?? 0);
+
+
+// --- 3. QUERY TRANSAKSI TERAKHIR (Untuk Tabel) ---
 $sql_transaksi = "
     SELECT 
         p.id,
-        p.nama_pengguna AS nama_anggota,
+        p.nama_pengguna AS nama_peminjam,
         b.judul_buku,
+        p.jumlah,
         p.tanggal_pinjam AS tanggal,
         IF(k.id IS NULL, 'Dipinjam', 'Dikembalikan') AS status
     FROM peminjaman_buku p
     JOIN buku b ON p.id_buku = b.id
-    LEFT JOIN pengembalian_buku k 
-        ON p.id = k.id_peminjaman
+    LEFT JOIN pengembalian_buku k ON p.id = k.id_peminjaman
     ORDER BY p.created_at DESC
     LIMIT 10
 ";
-
 $result_transaksi = mysqli_query($koneksi, $sql_transaksi);
 ?>
 
@@ -90,7 +98,7 @@ $result_transaksi = mysqli_query($koneksi, $sql_transaksi);
                     <p class="text-muted">
                         Tambahkan transaksi peminjaman buku
                     </p>
-                    <a href="../transaksi/keluar.php" class="btn btn-danger">
+                    <a href="../transaksi/peminjaman.php" class="btn btn-danger">
                         <i class="bi bi-pencil-square"></i> Input Peminjaman
                     </a>
                 </div>
@@ -105,7 +113,7 @@ $result_transaksi = mysqli_query($koneksi, $sql_transaksi);
                     <p class="text-muted">
                         Proses pengembalian buku
                     </p>
-                    <a href="../transaksi/masuk.php" class="btn btn-success">
+                    <a href="../transaksi/pengembalian.php" class="btn btn-success">
                         <i class="bi bi-pencil-square"></i> Input Pengembalian
                     </a>
                 </div>
@@ -120,11 +128,12 @@ $result_transaksi = mysqli_query($koneksi, $sql_transaksi);
             </h6>
 
             <div class="table-responsive">
-                <table class="table table-hover align-middle">
-                    <thead class="table-light">
+                <table class="table table-bordered table-hover align-middle">
+                    <thead class="table-primary text-center">
                         <tr>
-                            <th>Nama Anggota</th>
+                            <th>Nama Peminjam</th>
                             <th>Buku</th>
+                            <th>Jumlah</th>
                             <th>Tanggal</th>
                             <th>Status</th>
                         </tr>
@@ -133,10 +142,15 @@ $result_transaksi = mysqli_query($koneksi, $sql_transaksi);
                         <?php if (mysqli_num_rows($result_transaksi) > 0): ?>
                             <?php while ($row = mysqli_fetch_assoc($result_transaksi)): ?>
                                 <tr>
-                                    <td><?= htmlspecialchars($row['nama_anggota']) ?></td>
-                                    <td><?= htmlspecialchars($row['judul_buku']) ?></td>
-                                    <td><?= date('d-m-Y', strtotime($row['tanggal'])) ?></td>
-                                    <td>
+                                    <td class="text-center"><?= htmlspecialchars($row['nama_peminjam']) ?></td>
+                                    <td class="text-center"><?= htmlspecialchars($row['judul_buku']) ?></td>
+                                    <td class="text-center">
+                                        <span class="badge bg-secondary text-white">
+                                            <?= $row['jumlah'] ?> Buku
+                                        </span>
+                                    </td>
+                                    <td class="text-center"><?= date('d-m-Y', strtotime($row['tanggal'])) ?></td>
+                                    <td class="text-center">
                                         <?php if ($row['status'] === 'Dipinjam'): ?>
                                             <span class="badge bg-warning text-dark">Dipinjam</span>
                                         <?php else: ?>

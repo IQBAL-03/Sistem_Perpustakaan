@@ -165,7 +165,10 @@ require_once '../partials/header.php';
                             </select>
                         </div>
 
-                        <button class="btn btn-success mt-4">Simpan</button>
+                        <div class="mt-4 d-flex justify-content-between">
+                            <a href="../dashboard/index.php" class="btn btn-secondary">Kembali</a>
+                            <button type="submit" class="btn btn-success">Simpan</button>
+                        </div>
                     </form>
 
                 </div>

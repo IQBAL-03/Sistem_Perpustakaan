@@ -52,12 +52,12 @@ if (session_status() == PHP_SESSION_NONE) {
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" href="/sistem-perpus/transaksi/masuk.php">
+                                    <a class="dropdown-item" href="/sistem-perpus/transaksi/pengembalian.php">
                                         <i class="fas fa-arrow-up text-success"></i> Pengembalian
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="/sistem-perpus/transaksi/keluar.php">
+                                    <a class="dropdown-item" href="/sistem-perpus/transaksi/peminjaman.php">
                                         <i class="fas fa-arrow-up text-danger"></i> Peminjaman
                                     </a>
                                 </li>

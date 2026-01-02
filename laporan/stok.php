@@ -3,10 +3,15 @@ require_once '../config/koneksi.php';
 $judul = "Laporan Stok Buku";
 require_once '../partials/header.php';
 ?>
-
 <div class="container my-5">
-    <div class="col-md-12">
-        <h2><i class="fas fa-chart-line"></i> Laporan Stok Buku Real-Time</h2>
+    <div class="d-flex justify-content-between align-items-center">
+        <h2 class="mb-0">
+            <i class="fas fa-chart-line"></i> Laporan Stok Buku Real-Time
+        </h2>
+
+        <a href="../dashboard/index.php" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Kembali
+        </a>
     </div>
 </div>
 

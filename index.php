@@ -47,7 +47,7 @@ require_once 'partials/header.php';
                         <p class="text-muted">
                             Kelola buku masuk dan keluar perpustakaan.
                         </p>
-                        <a href="/sistem-perpus/transaksi/masuk.php" class="btn btn-outline-primary btn-sm">
+                        <a href="/sistem-perpus/transaksi/pengembalian.php" class="btn btn-outline-primary btn-sm">
                             Kelola
                         </a>
                     </div>

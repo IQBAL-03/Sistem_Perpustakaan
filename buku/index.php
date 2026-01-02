@@ -6,22 +6,20 @@ require_once '../partials/header.php';
 
 <div class="container my-5">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <div>
-            <h3 class="fw-bold mb-0">
-                <i class="bi bi-book"></i> Daftar Buku
-            </h3>
-        </div>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="fw-bold">
+            <i class="bi bi-book"></i> Daftar Buku
+        </h4>
 
-        <?php if (isset($_SESSION['user_id'])): ?>
+        <div class="d-flex gap-2">
+            <a href="../dashboard/index.php" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Kembali
+            </a>
+
             <a href="tambah.php" class="btn btn-success">
                 <i class="bi bi-plus"></i> Tambah Buku Baru
             </a>
-        <?php else: ?>
-            <span class="text-muted">
-                <i class="bi bi-info-circle"></i> Login untuk mengelola buku
-            </span>
-        <?php endif; ?>
+        </div>
     </div>
 
     <?php
