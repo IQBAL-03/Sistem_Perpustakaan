@@ -4,12 +4,12 @@ require_once '../config/koneksi.php';
 $judul = "Dashboard Admin";
 require_once '../partials/header.php';
 
-$sql_total_buku = "SELECT COUNT(*) AS total FROM barang";
+$sql_total_buku = "SELECT COUNT(*) AS total FROM buku";
 $result_total_buku = mysqli_query($koneksi, $sql_total_buku);
 $row_total_buku = mysqli_fetch_assoc($result_total_buku);
 $total_buku = $row_total_buku['total'];
 
-$sql_total_stok = "SELECT SUM(stok) AS total_stok FROM barang";
+$sql_total_stok = "SELECT SUM(stok) AS total_stok FROM buku";
 $result_total_stok = mysqli_query($koneksi, $sql_total_stok);
 $row_total_stok = mysqli_fetch_assoc($result_total_stok);
 $total_stok = (int) ($row_total_stok['total_stok'] ?? 0);
@@ -102,7 +102,7 @@ $total_pengguna = $row_total_pengguna['total_pengguna'];
                     <p class="text-muted">
                         Tambah, ubah, dan hapus data buku
                     </p>
-                    <a href="../barang/index.php" class="btn btn-primary">
+                    <a href="../buku/index.php" class="btn btn-primary">
                         Kelola Buku
                     </a>
                 </div>

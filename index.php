@@ -32,7 +32,7 @@ require_once 'partials/header.php';
                         <p class="text-muted">
                             Lihat dan kelola koleksi buku perpustakaan.
                         </p>
-                        <a href="/sistem-perpus/barang/index.php" class="btn btn-outline-primary btn-sm">
+                        <a href="/sistem-perpus/buku/index.php" class="btn btn-outline-primary btn-sm">
                             Lihat Data
                         </a>
                     </div>
@@ -45,7 +45,7 @@ require_once 'partials/header.php';
                         <i class="bi bi-arrow-left-right fs-1 text-primary"></i>
                         <h5 class="mt-3">Transaksi</h5>
                         <p class="text-muted">
-                            Kelola barang masuk dan keluar perpustakaan.
+                            Kelola buku masuk dan keluar perpustakaan.
                         </p>
                         <a href="/sistem-perpus/transaksi/masuk.php" class="btn btn-outline-primary btn-sm">
                             Kelola

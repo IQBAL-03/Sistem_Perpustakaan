@@ -11,7 +11,7 @@ SELECT
     pb.tanggal_pinjam,
     pb.tanggal_dikembalikan
 FROM peminjaman_buku pb
-JOIN barang b ON pb.id_buku = b.id
+JOIN buku b ON pb.id_buku = b.id
 WHERE pb.nama_pengguna = ?
 AND pb.status = 'dipinjam'
 LIMIT 1

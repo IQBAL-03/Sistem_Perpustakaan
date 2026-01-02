@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         mysqli_query(
             $koneksi,
-            "UPDATE barang 
+            "UPDATE buku 
              SET stok = stok + {$pinjam['jumlah']} 
              WHERE id = {$pinjam['id_buku']}"
         );

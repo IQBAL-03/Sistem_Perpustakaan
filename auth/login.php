@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['id'])) {
-    header("Location: ../barang/index.php");
+    header("Location: ../buku/index.php");
     exit();
 }
 require_once '../config/koneksi.php';

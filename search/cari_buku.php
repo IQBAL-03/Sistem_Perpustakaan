@@ -5,7 +5,7 @@ $keyword = $_GET['keyword'];
 
 $query = mysqli_prepare(
     $koneksi,
-    "SELECT id, judul_buku FROM barang 
+    "SELECT id, judul_buku FROM buku 
      WHERE judul_buku LIKE CONCAT('%', ?, '%') 
      LIMIT 10"
 );

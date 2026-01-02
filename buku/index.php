@@ -59,7 +59,7 @@ require_once '../partials/header.php';
                     </thead>
                     <tbody>
                         <?php
-                        $sql = "SELECT * FROM barang ORDER BY kode_buku ASC";
+                        $sql = "SELECT * FROM buku ORDER BY kode_buku ASC";
                         $result = mysqli_query($koneksi, $sql);
 
                         if (mysqli_num_rows($result) > 0) {

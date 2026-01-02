@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty($errors)) {
-        $sql = "INSERT INTO barang (kode_buku, judul_buku, penulis, penerbit, tahun, stok, status) VALUES (?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO buku (kode_buku, judul_buku, penulis, penerbit, tahun, stok, status) VALUES (?,?,?,?,?,?,?)";
 
         $stmt = mysqli_prepare($koneksi, $sql);
 

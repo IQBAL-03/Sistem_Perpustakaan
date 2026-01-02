@@ -9,7 +9,7 @@ if (!isset($_GET['id']) || empty($_GET['id'])){
 
 $id = intval($_GET['id']);
 
-$sql = "DELETE FROM barang WHERE id = ?";
+$sql = "DELETE FROM buku WHERE id = ?";
 $stmt = mysqli_prepare($koneksi, $sql);
 mysqli_stmt_bind_param($stmt, "i", $id);
 

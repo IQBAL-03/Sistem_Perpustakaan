@@ -9,7 +9,7 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 
 $id = intval($_GET['id']);
 
-$sql = "SELECT * FROM barang WHERE id = ?";
+$sql = "SELECT * FROM buku WHERE id = ?";
 $stmt = mysqli_prepare($koneksi, $sql);
 mysqli_stmt_bind_param($stmt, "i", $id);
 mysqli_stmt_execute($stmt);
@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty($errors)) {
-        $sql = "UPDATE barang SET kode_buku = ?, judul_buku = ?, penulis = ?, penerbit = ?, tahun = ?, stok = ?, status = ? WHERE id = ?";
+        $sql = "UPDATE buku SET kode_buku = ?, judul_buku = ?, penulis = ?, penerbit = ?, tahun = ?, stok = ?, status = ? WHERE id = ?";
         $stmt = mysqli_prepare($koneksi, $sql);
 
         mysqli_stmt_bind_param($stmt, "ssssiisi", $kode_buku, $judul_buku, $penulis, $penerbit, $tahun, $stok, $status, $id);

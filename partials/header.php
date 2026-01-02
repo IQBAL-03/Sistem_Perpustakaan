@@ -28,7 +28,7 @@ if (session_status() == PHP_SESSION_NONE) {
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <?php if (isset($_SESSION['user_id']) && $_SESSION['role'] == 'admin'): ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="/sistem-perpus/barang/index.php">
+                            <a class="nav-link" href="/sistem-perpus/buku/index.php">
                                 <i class="bi bi-journal-bookmark"></i> Data Buku
                             </a>
                         </li>

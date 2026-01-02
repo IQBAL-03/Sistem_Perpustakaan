@@ -41,7 +41,7 @@ require_once '../partials/header.php';
         END
     ), 0) AS total_dikembalikan
 
-FROM barang b
+FROM buku b
 LEFT JOIN peminjaman_buku pb ON pb.id_buku = b.id
 LEFT JOIN pengembalian_buku pmb ON pmb.id_peminjaman = pb.id
 GROUP BY b.id

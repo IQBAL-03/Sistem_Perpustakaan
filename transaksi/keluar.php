@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty($errors)) {
-        $sql = "SELECT judul_buku, stok FROM barang WHERE id = ?";
+        $sql = "SELECT judul_buku, stok FROM buku WHERE id = ?";
         $stmt = mysqli_prepare($koneksi, $sql);
         mysqli_stmt_bind_param($stmt, "i", $id_buku);
         mysqli_stmt_execute($stmt);
@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (mysqli_stmt_execute($stmt)) {
 
-            $sql_update = "UPDATE barang SET stok = stok - ? WHERE id = ?";
+            $sql_update = "UPDATE buku SET stok = stok - ? WHERE id = ?";
             $stmt_update = mysqli_prepare($koneksi, $sql_update);
             mysqli_stmt_bind_param($stmt_update, "ii", $jumlah, $id_buku);
             mysqli_stmt_execute($stmt_update);
@@ -87,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-$sql_buku = "SELECT id, judul_buku FROM barang ORDER BY judul_buku ASC";
+$sql_buku = "SELECT id, judul_buku FROM buku ORDER BY judul_buku ASC";
 $result_buku = mysqli_query($koneksi, $sql_buku);
 
 $tanggal_pinjam = date('Y-m-d');

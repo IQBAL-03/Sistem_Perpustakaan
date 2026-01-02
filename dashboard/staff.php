@@ -31,7 +31,7 @@ $sql_transaksi = "
         p.tanggal_pinjam AS tanggal,
         IF(k.id IS NULL, 'Dipinjam', 'Dikembalikan') AS status
     FROM peminjaman_buku p
-    JOIN barang b ON p.id_buku = b.id
+    JOIN buku b ON p.id_buku = b.id
     LEFT JOIN pengembalian_buku k 
         ON p.id = k.id_peminjaman
     ORDER BY p.created_at DESC
