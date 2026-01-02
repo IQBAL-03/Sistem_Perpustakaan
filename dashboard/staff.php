@@ -4,20 +4,14 @@ require_once '../config/koneksi.php';
 $judul = "Dashboard Staff";
 require_once '../partials/header.php';
 
-// --- 1. HITUNG TRANSAKSI (Menghitung berapa kali kejadian/baris) ---
-// Total berapa kali orang melakukan peminjaman
 $sql_peminjaman_trx = "SELECT COUNT(*) AS total FROM peminjaman_buku";
 $res_peminjaman_trx = mysqli_query($koneksi, $sql_peminjaman_trx);
 $total_peminjaman = (int) (mysqli_fetch_assoc($res_peminjaman_trx)['total'] ?? 0);
 
-// Total berapa kali orang melakukan pengembalian
 $sql_pengembalian_trx = "SELECT COUNT(*) AS total FROM pengembalian_buku";
 $res_pengembalian_trx = mysqli_query($koneksi, $sql_pengembalian_trx);
 $total_pengembalian = (int) (mysqli_fetch_assoc($res_pengembalian_trx)['total'] ?? 0);
 
-
-// --- 2. HITUNG FISIK BUKU (Logika: Jika sudah kembali, maka tidak dihitung) ---
-// Query ini hanya menjumlahkan kolom 'jumlah' dari buku yang BELUM dikembalikan
 $sql_belum_kembali_fisik = "
     SELECT SUM(p.jumlah) AS total 
     FROM peminjaman_buku p
@@ -27,11 +21,8 @@ $sql_belum_kembali_fisik = "
 $res_belum_kembali = mysqli_query($koneksi, $sql_belum_kembali_fisik);
 $row_belum_kembali = mysqli_fetch_assoc($res_belum_kembali);
 
-// Hasil akhirnya: Jika semua transaksi sudah ada pasangannya di tabel kembali, nilainya PASTI 0
 $total_belum_kembali = (int) ($row_belum_kembali['total'] ?? 0);
 
-
-// --- 3. QUERY TRANSAKSI TERAKHIR (Untuk Tabel) ---
 $sql_transaksi = "
     SELECT 
         p.id,

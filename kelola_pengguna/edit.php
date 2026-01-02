@@ -1,6 +1,6 @@
 <?php
-require_once '../config/koneksi.php';
 require_once '../middleware/cek_login.php';
+require_once '../config/koneksi.php';
 $judul = "Edit Pengguna";
 
 if (!isset($_GET['id'])) {

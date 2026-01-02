@@ -1,4 +1,5 @@
 <?php
+require_once '../middleware/cek_login.php';
 require_once '../config/koneksi.php';
 
 $nama = $_GET['nama'] ?? '';

@@ -1,4 +1,5 @@
 <?php
+require_once '../middleware/cek_login.php';
 require_once '../config/koneksi.php';
 $judul = "Laporan Stok Buku";
 require_once '../partials/header.php';

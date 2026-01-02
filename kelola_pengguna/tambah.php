@@ -1,6 +1,6 @@
 <?php
-require_once '../config/koneksi.php';
 require_once '../middleware/cek_login.php';
+require_once '../config/koneksi.php';
 $judul = "Tambah Anggota";
 
 $errors = [];
