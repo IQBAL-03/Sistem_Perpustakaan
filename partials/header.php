@@ -17,6 +17,13 @@ if (session_status() == PHP_SESSION_NONE) {
 
 <body class="d-flex flex-column min-vh-100">
 
+    <div id="loader" class="position-fixed vh-100 vw-100 d-flex justify-content-center align-items-center bg-white"
+        style="z-index: 9999; top: 0; left: 0;">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
         <div class="container">
             <a class="navbar-brand fw-bold" href="/sistem-perpus/index.php">

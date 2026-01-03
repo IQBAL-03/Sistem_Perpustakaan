@@ -66,6 +66,13 @@ $judul = "Login";
 
 <body class="d-flex align-items-center justify-content-center">
 
+    <div id="loader" class="position-fixed vh-100 vw-100 d-flex justify-content-center align-items-center bg-white"
+        style="z-index: 9999; top: 0; left: 0;">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-5 col-lg-4">
@@ -131,8 +138,7 @@ $judul = "Login";
     </div>
 
 </body>
-
-
+<script src="../js/script.js"></script>
 </html>
 
 <?php
