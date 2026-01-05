@@ -5,14 +5,20 @@ $judul = "Laporan Stok Buku";
 require_once '../partials/header.php';
 ?>
 <div class="container my-5">
-    <div class="d-flex justify-content-between align-items-center">
-        <h2 class="mb-0">
-            <i class="fas fa-chart-line"></i> Laporan Stok Buku Real-Time
+    <div class="d-flex justify-content-between align-items-center gap-2">
+        <h2 class="mb-0 d-flex align-items-center gap-2">
+            <i class="bi bi-graph-up-arrow"></i> 
+            Laporan Stok Buku Real-Time
         </h2>
 
-        <a href="../dashboard/index.php" class="btn btn-secondary">
-            <i class="bi bi-arrow-left"></i> Kembali
-        </a>
+        <div class="d-flex gap-2">
+            <a href="../dashboard/index.php" class="btn btn-secondary d-flex align-items-center">
+                <i class="bi bi-arrow-left me-2"></i> Kembali
+            </a>
+            <button onclick="window.print()" class="btn btn-primary d-flex align-items-center">
+                <i class="bi bi-printer me-2"></i> Cetak Laporan
+            </button>
+        </div>
     </div>
 </div>
 
