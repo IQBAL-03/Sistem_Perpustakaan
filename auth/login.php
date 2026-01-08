@@ -123,7 +123,6 @@ $judul = "Login";
                                 </button>
                             </div>
                         </form>
-
                     </div>
 
                     <div class="card-footer text-center text-muted">
