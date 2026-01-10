@@ -123,7 +123,6 @@ $judul = "Login";
                                 </button>
                             </div>
                         </form>
-
                     </div>
 
                     <div class="card-footer text-center text-muted">
@@ -137,7 +136,6 @@ $judul = "Login";
             </div>
         </div>
     </div>
-
 </body>
 <script src="../js/script.js"></script>
 </html>
