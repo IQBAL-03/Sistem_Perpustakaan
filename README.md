@@ -1,4 +1,4 @@
-# 📚 Sistem Informasi Perpustakaan
+# Sistem Informasi Perpustakaan
 
 Sistem Informasi Perpustakaan adalah aplikasi berbasis web untuk mengelola **data buku, pengguna, peminjaman, dan pengembalian buku** secara efisien dan terstruktur.
 
