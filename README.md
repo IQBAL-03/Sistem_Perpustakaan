@@ -20,9 +20,9 @@ Project ini dibuat menggunakan **PHP Native dan MySQL**.
 * Prepared Statement (Anti SQL Injection)
 * Session login
 
-## Teknologi
+## Tech Stack
 
 * PHP Native
 * MySQL
 * Bootstrap 5
-* JavaScript (AJAX)
+* JavaScript
