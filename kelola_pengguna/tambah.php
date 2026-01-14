@@ -1,7 +1,7 @@
 <?php
 require_once '../middleware/cek_login.php';
 require_once '../config/koneksi.php';
-$judul = "Tambah Anggota";
+$judul = "Tambah Staff";
 
 $errors = [];
 $success = false;
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($errors)) {
         $hashed_password = password_hash($password, PASSWORD_BCRYPT, ['cost' => 10]);
-        $sql_insert = "INSERT INTO pengguna (nama, username, password, role, tanggal_dibuat) VALUES (?, ?, ?, 'member', NOW())";
+        $sql_insert = "INSERT INTO pengguna (nama, username, password, role, tanggal_dibuat) VALUES (?, ?, ?, 'staff', NOW())";
         $stmt_insert = mysqli_prepare($koneksi, $sql_insert);
         mysqli_stmt_bind_param($stmt_insert, "sss", $nama, $username, $hashed_password);
 
@@ -61,13 +61,13 @@ require_once '../partials/header.php';
         <div class="col-md-6">
             <div class="card shadow-sm">
                 <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0"><i class="bi bi-person-plus"></i> Tambah Anggota Baru</h5>
+                    <h5 class="mb-0"><i class="bi bi-person-plus"></i> Tambah Staff Baru</h5>
                 </div>
                 <div class="card-body">
 
                     <?php if ($success): ?>
                         <div class="alert alert-success">
-                            <i class="fas fa-check-circle"></i> Anggota baru berhasil ditambahkan.
+                            <i class="fas fa-check-circle"></i> Staff baru berhasil ditambahkan.
                         </div>
                     <?php endif; ?>
 
@@ -108,7 +108,7 @@ require_once '../partials/header.php';
                         <div class="d-flex justify-content-between mt-4">
                             <a href="index.php" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Kembali</a>
                             <button type="submit" class="btn btn-primary"><i class="bi bi-check-circle"></i> Tambah
-                                Anggota</button>
+                                Staff</button>
                         </div>
                     </form>
 
