@@ -15,7 +15,7 @@ require_once 'partials/header.php';
     </div>
 
     <div class="row g-4">
-        <div class="col-md-4">
+        <div class="col-4">
             <div class="card shadow-sm border-0 h-100 text-center">
                 <div class="card-body">
                     <i class="bi bi-journal-bookmark-fill fs-1 text-primary"></i>
@@ -27,7 +27,7 @@ require_once 'partials/header.php';
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-4">
             <div class="card shadow-sm border-0 h-100 text-center">
                 <div class="card-body">
                     <i class="bi bi-clipboard-data fs-1 text-success"></i>
@@ -39,7 +39,7 @@ require_once 'partials/header.php';
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-4">
             <div class="card shadow-sm border-0 h-100 text-center">
                 <div class="card-body">
                     <i class="bi bi-people-fill fs-1 text-warning"></i>

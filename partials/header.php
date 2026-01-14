@@ -8,7 +8,6 @@ if (session_status() == PHP_SESSION_NONE) {
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= isset($judul) ? $judul : 'Sistem Perpustakaan' ?></title>
     <link rel="icon" type="image/x-icon" href="../image/icon.png">
     <link rel="icon" type="image/x-icon" href="image/icon.png">
@@ -26,7 +25,7 @@ if (session_status() == PHP_SESSION_NONE) {
         </div>
     </div>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <nav class="navbar navbar-expand navbar-dark bg-primary shadow-sm">
         <div class="container">
             <?php
             if (isset($_SESSION['user_id'])){
