@@ -6,34 +6,28 @@ $id_user = $_SESSION['user_id'];
 $pesan_sukses = "";
 $pesan_error = "";
 
-// Handle Update Profil
 if (isset($_POST['update_profil'])) {
     $nama = mysqli_real_escape_string($koneksi, $_POST['nama']);
     $username = mysqli_real_escape_string($koneksi, $_POST['username']);
     $foto_baru = "";
 
-    // Cek apakah ada file foto yang diupload
     if ($_FILES['foto']['error'] === 0) {
         $nama_file = $_FILES['foto']['name'];
         $ukuran_file = $_FILES['foto']['size'];
         $tmp_name = $_FILES['foto']['tmp_name'];
 
-        // Validasi ekstensi
-        $ekstensi_valid = ['jpg', 'jpeg', 'png'];
+        $ekstensi_valid = ['jpg', 'jpeg', 'png', 'webp'];
         $ekstensi_file = strtolower(pathinfo($nama_file, PATHINFO_EXTENSION));
 
         if (!in_array($ekstensi_file, $ekstensi_valid)) {
-            $pesan_error = "Hanya file JPG, JPEG, dan PNG yang diperbolehkan!";
-        } elseif ($ukuran_file > 2000000) { // Max 2MB
-            $pesan_error = "Ukuran file terlalu besar! Maksimal 2MB.";
+            $pesan_error = "Hanya file JPG, JPEG, PNG, dan WEBP yang diperbolehkan!";
+        } elseif ($ukuran_file > 26214400) {
+            $pesan_error = "Ukuran file terlalu besar! Maksimal 25MB.";
         } else {
-            // Beri nama unik pada foto
             $foto_baru = uniqid() . '.' . $ekstensi_file;
             $tujuan = '../uploads/' . $foto_baru;
 
-            // Pindahkan file ke folder uploads
             if (move_uploaded_file($tmp_name, $tujuan)) {
-                // Hapus foto lama jika ada
                 $sql_lama = "SELECT foto FROM pengguna WHERE id = '$id_user'";
                 $res_lama = mysqli_query($koneksi, $sql_lama);
                 $old_data = mysqli_fetch_assoc($res_lama);
@@ -66,7 +60,6 @@ if (isset($_POST['update_profil'])) {
     }
 }
 
-// Handle Ganti Password
 if (isset($_POST['ganti_password'])) {
     $pw_lama = $_POST['password_lama'];
     $pw_baru = $_POST['password_baru'];
@@ -111,35 +104,30 @@ require_once '../partials/header.php';
         </div>
     <?php endif; ?>
 
-    <!-- Informasi Akun -->
     <div class="card shadow mb-4">
         <div class="card-header bg-primary text-white">
             <i class="bi bi-person-fill"></i> Informasi Akun
         </div>
         <div class="card-body">
             <form method="post" enctype="multipart/form-data">
-
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label class="form-label">Nama Lengkap</label>
                         <input type="text" name="nama" class="form-control"
                                value="<?= htmlspecialchars($_SESSION['nama'] ?? '') ?>" required>
                     </div>
-
                     <div class="col-md-6">
                         <label class="form-label">Username</label>
                         <input type="text" name="username" class="form-control"
                                value="<?= htmlspecialchars($_SESSION['username'] ?? '') ?>" required>
                     </div>
                 </div>
-
                 <div class="row mb-4">
                     <div class="col-md-6">
                         <label class="form-label">Foto Profil</label>
-                        <input type="file" name="foto" class="form-control" accept="image/*">
-                        <small class="text-muted">Kosongkan jika tidak ingin mengganti</small>
+                        <input type="file" name="foto" class="form-control" accept=".png, .jpg, .jpeg, .webp">
+                        <small class="text-muted">Upload file foto max 25mb</small>
                     </div>
-
                     <div class="col-md-6 d-flex align-items-end">
                         <?php if (!empty($_SESSION['foto'])): ?>
                             <img src="../uploads/<?= $_SESSION['foto']; ?>"
@@ -151,7 +139,6 @@ require_once '../partials/header.php';
                         <?php endif; ?>
                     </div>
                 </div>
-
                 <button type="submit" name="update_profil" class="btn btn-success">
                     <i class="bi bi-save"></i> Simpan Perubahan
                 </button>
@@ -159,7 +146,6 @@ require_once '../partials/header.php';
         </div>
     </div>
 
-    <!-- Ganti Password -->
     <div class="card shadow mb-4">
         <div class="card-header bg-warning">
             <i class="bi bi-shield-lock-fill"></i> Ganti Password
@@ -171,18 +157,15 @@ require_once '../partials/header.php';
                         <label class="form-label">Password Lama</label>
                         <input type="password" name="password_lama" class="form-control" required>
                     </div>
-
                     <div class="col-md-4">
                         <label class="form-label">Password Baru</label>
                         <input type="password" name="password_baru" class="form-control" required>
                     </div>
-
                     <div class="col-md-4">
                         <label class="form-label">Konfirmasi Password</label>
                         <input type="password" name="konfirmasi_password" class="form-control" required>
                     </div>
                 </div>
-
                 <button type="submit" name="ganti_password" class="btn btn-warning">
                     <i class="bi bi-key-fill"></i> Ganti Password
                 </button>
@@ -190,7 +173,6 @@ require_once '../partials/header.php';
         </div>
     </div>
 
-    <!-- Tombol Kembali -->
     <a href="../dashboard/index.php" class="btn btn-secondary">
         <i class="bi bi-arrow-left"></i> Kembali ke Dashboard
     </a>
