@@ -78,10 +78,17 @@ if (session_status() == PHP_SESSION_NONE) {
                     <?php endif; ?>
                     <?php if (isset($_SESSION['user_id'])): ?>
                         <li class="nav-item">
-                            <span class="nav-link user-badge">
-                                <i class="fas fa-user-circle"></i>
+                            <a href="/sistem-perpus/profil/profil.php" class="nav-link user-badge d-flex align-items-center">
+                                <?php if (!empty($_SESSION['foto'])): ?>
+                                    <img src="/sistem-perpus/uploads/<?= $_SESSION['foto']; ?>" 
+                                         class="rounded-circle border border-white" 
+                                         width="30" height="30" 
+                                         style="object-fit: cover; margin-right: 8px;">
+                                <?php else: ?>
+                                    <i class="fas fa-user-circle me-1"></i>
+                                <?php endif; ?>
                                 <?= htmlspecialchars($_SESSION['nama']) ?>
-                            </span>
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/sistem-perpus/auth/logout.php">
