@@ -26,3 +26,4 @@ Project ini dibuat menggunakan **PHP Native dan MySQL**.
 * MySQL
 * Bootstrap 5
 * JavaScript
+
