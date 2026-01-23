@@ -26,11 +26,20 @@ require_once '../partials/header.php';
     <?php
     if (isset($_GET['status'])) {
         if ($_GET['status'] == 'sukses_tambah') {
-            echo '<div class = "alert alert-success">Buku Baru Berhasil Ditambahkan !</div>';
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Buku Baru Berhasil Ditambahkan !
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>';
         } elseif ($_GET['status'] == 'sukses_edit') {
-            echo '<div class="alert alert-info">Data Buku Berhasil Diperbarui !</div>';
+            echo '<div class="alert alert-info alert-dismissible fade show" role="alert">
+                    Data Buku Berhasil Diperbarui !
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>';
         } elseif ($_GET['status'] == 'sukses_hapus') {
-            echo '<div class="alert alert-warning">Buku Berhasil Dihapus !</div>';
+            echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    Buku Berhasil Dihapus !
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>';
         } 
     }
     ?>

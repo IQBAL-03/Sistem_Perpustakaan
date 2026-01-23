@@ -11,7 +11,9 @@ if (isset($_POST['update_profil'])) {
     $username = mysqli_real_escape_string($koneksi, $_POST['username']);
     $foto_baru = "";
 
-    if ($_FILES['foto']['error'] === 0) {
+    if ($_FILES['foto']['error'] === 4) {
+        $pesan_error = "Silahkan upload foto terlebih dahulu!";
+    } elseif ($_FILES['foto']['error'] === 0) {
         $nama_file = $_FILES['foto']['name'];
         $ukuran_file = $_FILES['foto']['size'];
         $tmp_name = $_FILES['foto']['tmp_name'];
@@ -60,6 +62,23 @@ if (isset($_POST['update_profil'])) {
     }
 }
 
+if (isset($_POST['hapus_foto'])) {
+    $sql = "SELECT foto FROM pengguna WHERE id = '$id_user'";
+    $res = mysqli_query($koneksi, $sql);
+    $data = mysqli_fetch_assoc($res);
+
+    if (!empty($data['foto'])) {
+        if (file_exists('../uploads/' . $data['foto'])) {
+            unlink('../uploads/' . $data['foto']);
+        }
+        $sql_upd = "UPDATE pengguna SET foto = '' WHERE id = '$id_user'";
+        if (mysqli_query($koneksi, $sql_upd)) {
+            $_SESSION['foto'] = '';
+            $pesan_sukses = "Foto profil berhasil dihapus!";
+        }
+    }
+}
+
 if (isset($_POST['ganti_password'])) {
     $pw_lama = $_POST['password_lama'];
     $pw_baru = $_POST['password_baru'];
@@ -90,6 +109,10 @@ $judul = "Pengaturan Akun";
 require_once '../partials/header.php';
 ?>
 <div class="container my-5" style="max-width: 1000px;">
+    <h3 class="fw-bold mb-4">
+        <i class="bi bi-gear-fill"></i> Pengaturan Akun
+    </h3>
+
     <?php if (!empty($pesan_sukses)): ?>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <i class="bi bi-check-circle-fill"></i> <?= $pesan_sukses ?>
@@ -128,14 +151,25 @@ require_once '../partials/header.php';
                         <input type="file" name="foto" class="form-control" accept=".png, .jpg, .jpeg, .webp">
                         <small class="text-muted">Upload file foto max 25mb</small>
                     </div>
-                    <div class="col-md-6 d-flex align-items-end">
+                    <div class="col-md-6 d-flex align-items-end mt-3 mt-md-0">
                         <?php if (!empty($_SESSION['foto'])): ?>
-                            <img src="../uploads/<?= $_SESSION['foto']; ?>"
-                                 class="rounded border"
-                                 width="120" height="120"
-                                 style="object-fit: cover;">
+                            <div class="text-center">
+                                <img src="../uploads/<?= $_SESSION['foto']; ?>"
+                                     class="rounded border shadow-sm mb-2"
+                                     width="120" height="120"
+                                     style="object-fit: cover;">
+                                <br>
+                                <button type="submit" name="hapus_foto" class="btn btn-outline-danger btn-sm" 
+                                        onclick="return confirm('Apakah Anda yakin ingin menghapus foto profil?')">
+                                    <i class="bi bi-trash"></i> Hapus Foto
+                                </button>
+                            </div>
                         <?php else: ?>
-                            <span class="text-muted">Belum ada foto</span>
+                            <div class="rounded border border-secondary border-dashed d-flex flex-column align-items-center justify-content-center bg-light shadow-sm"
+                                 style="width: 120px; height: 120px; border-style: dashed !important;">
+                                <i class="bi bi-camera text-muted fs-2"></i>
+                                <small class="text-muted mt-1" style="font-size: 0.7rem;">Foto Profil</small>
+                            </div>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -173,9 +207,14 @@ require_once '../partials/header.php';
         </div>
     </div>
 
-    <a href="../dashboard/index.php" class="btn btn-secondary">
-        <i class="bi bi-arrow-left"></i> Kembali ke Dashboard
-    </a>
+    <div class="d-flex justify-content-between align-items-center">
+        <a href="../dashboard/index.php" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Kembali ke Dashboard
+        </a>
+        <a href="../auth/logout.php" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin keluar?')">
+            <i class="bi bi-box-arrow-right"></i> Keluar / Logout
+        </a>
+    </div>
 </div>
 <?php
 mysqli_close($koneksi);

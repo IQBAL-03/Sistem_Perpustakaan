@@ -49,6 +49,7 @@ $judul = "Login";
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $judul ?> - Sistem Perpustakaan</title>
     <link rel="icon" type="image/x-icon" href="../image/icon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -61,6 +62,11 @@ $judul = "Login";
 
         .login-card {
             border-radius: 15px;
+            transition: transform 0.3s;
+        }
+
+        .login-card:hover {
+            transform: translateY(-5px);
         }
     </style>
 </head>
@@ -90,17 +96,24 @@ $judul = "Login";
 
                         <?php
                         if (isset($_GET['status']) && $_GET['status'] == 'logout_sukses') {
-                            echo '<div class="alert alert-warning">Anda berhasil logout.</div>';
+                            echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    Anda berhasil logout.
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                  </div>';
                         }
 
                         if (isset($_GET['pesan']) && $_GET['pesan'] == 'belum_login') {
-                            echo '<div class="alert alert-warning">Anda harus login terlebih dahulu.</div>';
+                            echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    Anda harus login terlebih dahulu.
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                  </div>';
                         }
                         ?>
 
                         <?php if (!empty($error)): ?>
-                            <div class="alert alert-danger text-center">
+                            <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
                                 <?= htmlspecialchars($error) ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         <?php endif; ?>
 
@@ -137,6 +150,7 @@ $judul = "Login";
         </div>
     </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../js/script.js"></script>
 </html>
 
