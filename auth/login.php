@@ -50,7 +50,7 @@ $judul = "Login";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $judul ?></title>
+    <title><?=  isset($judul) ? $judul : 'Sistem Perpustakaan'  ?></title>
     <link rel="icon" type="image/x-icon" href="../image/icon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -71,7 +71,6 @@ $judul = "Login";
     <div id="loader" class="position-fixed vh-100 vw-100 d-flex justify-content-center align-items-center bg-white"
         style="z-index: 9999; top: 0; left: 0;">
         <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-            <span class="visually-hidden">Loading...</span>
         </div>
     </div>
 
