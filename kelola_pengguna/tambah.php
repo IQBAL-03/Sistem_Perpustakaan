@@ -38,7 +38,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($errors)) {
         $hashed_password = password_hash($password, PASSWORD_BCRYPT, ['cost' => 10]);
-        $sql_insert = "INSERT INTO pengguna (nama, username, password, role, tanggal_dibuat) VALUES (?, ?, ?, 'staff', NOW())";
+        // Set foto kosong by default sesuai keinginan user
+        // Set foto kosong by default sesuai keinginan user
+        $sql_insert = "INSERT INTO pengguna (nama, username, password, role, tanggal_dibuat, foto) VALUES (?, ?, ?, 'staff', NOW(), '')";
         $stmt_insert = mysqli_prepare($koneksi, $sql_insert);
         mysqli_stmt_bind_param($stmt_insert, "sss", $nama, $username, $hashed_password);
 

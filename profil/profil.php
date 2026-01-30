@@ -27,14 +27,14 @@ if (isset($_POST['update_profil'])) {
             $pesan_error = "Ukuran file terlalu besar! Maksimal 25MB.";
         } else {
             $foto_baru = uniqid() . '.' . $ekstensi_file;
-            $tujuan = '../uploads/' . $foto_baru;
+            $tujuan = '../foto_profil/' . $foto_baru;
 
             if (move_uploaded_file($tmp_name, $tujuan)) {
                 $sql_lama = "SELECT foto FROM pengguna WHERE id = '$id_user'";
                 $res_lama = mysqli_query($koneksi, $sql_lama);
                 $old_data = mysqli_fetch_assoc($res_lama);
-                if (!empty($old_data['foto']) && file_exists('../uploads/' . $old_data['foto'])) {
-                    unlink('../uploads/' . $old_data['foto']);
+                if (!empty($old_data['foto']) && file_exists('../foto_profil/' . $old_data['foto'])) {
+                    unlink('../foto_profil/' . $old_data['foto']);
                 }
             } else {
                 $pesan_error = "Gagal mengupload foto.";
@@ -68,8 +68,8 @@ if (isset($_POST['hapus_foto'])) {
     $data = mysqli_fetch_assoc($res);
 
     if (!empty($data['foto'])) {
-        if (file_exists('../uploads/' . $data['foto'])) {
-            unlink('../uploads/' . $data['foto']);
+        if (file_exists('../foto_profil/' . $data['foto'])) {
+            unlink('../foto_profil/' . $data['foto']);
         }
         $sql_upd = "UPDATE pengguna SET foto = '' WHERE id = '$id_user'";
         if (mysqli_query($koneksi, $sql_upd)) {
@@ -154,7 +154,7 @@ require_once '../partials/header.php';
                     <div class="col-md-6 d-flex align-items-end mt-3 mt-md-0">
                         <?php if (!empty($_SESSION['foto'])): ?>
                             <div class="text-center">
-                                <img src="../uploads/<?= $_SESSION['foto']; ?>"
+                                <img src="../foto_profil/<?= $_SESSION['foto']; ?>"
                                      class="rounded border shadow-sm mb-2"
                                      width="120" height="120"
                                      style="object-fit: cover;">

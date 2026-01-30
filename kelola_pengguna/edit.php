@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Username tidak boleh kosong";
     }
 
-    if (!in_array($role, ['admin','staff','member'])) {
+    if (!in_array($role, ['admin', 'staff'])) {
         $errors[] = "Role tidak valid";
     }
 
@@ -104,9 +104,8 @@ require_once '../partials/header.php';
                             <label for="role" class="form-label">Role</label>
                             <select id="role" name="role" class="form-select" required>
                                 <option value="">-- Pilih Role --</option>
-                                <option value="admin" <?= $pengguna['role']=='admin' ? 'selected' : '' ?>>Admin</option>
-                                <option value="staff" <?= $pengguna['role']=='staff' ? 'selected' : '' ?>>Staff</option>
-                                <option value="member" <?= $pengguna['role']=='member' ? 'selected' : '' ?>>Member</option>
+                                <option value="admin" <?= $pengguna['role'] == 'admin' ? 'selected' : '' ?>>Admin</option>
+                                <option value="staff" <?= $pengguna['role'] == 'staff' ? 'selected' : '' ?>>Staff / Anggota</option>
                             </select>
                         </div>
 

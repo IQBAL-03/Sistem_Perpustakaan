@@ -102,7 +102,7 @@ if (session_status() == PHP_SESSION_NONE) {
                             <li class="nav-item">
                                 <a href="/sistem-perpus/profil/profil.php" class="nav-link user-badge d-flex align-items-center">
                                     <?php if (!empty($_SESSION['foto'])): ?>
-                                        <img src="/sistem-perpus/uploads/<?= $_SESSION['foto']; ?>" 
+                                        <img src="/sistem-perpus/foto_profil/<?= $_SESSION['foto']; ?>" 
                                              class="rounded-circle border border-white" 
                                              width="30" height="30" 
                                              style="object-fit: cover; margin-right: 8px;">
