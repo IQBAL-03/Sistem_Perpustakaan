@@ -173,18 +173,30 @@ require_once '../partials/header.php';
 
 
 <script>
-    document.getElementById('judul_buku').addEventListener('keyup', function () {
-        let keyword = this.value;
-        if (keyword.length < 2) {
-            document.getElementById('hasil_buku').innerHTML = '';
-            return;
-        }
+    let judulInput = document.getElementById('judul_buku');
+    let hasilDiv = document.getElementById('hasil_buku');
 
+    function cariBuku(keyword = '') {
         fetch('../search/cari_buku.php?keyword=' + keyword)
             .then(res => res.text())
             .then(data => {
-                document.getElementById('hasil_buku').innerHTML = data;
+                hasilDiv.innerHTML = data;
             });
+    }
+
+    judulInput.addEventListener('focus', function() {
+        cariBuku(this.value);
+    });
+
+    judulInput.addEventListener('keyup', function() {
+        cariBuku(this.value);
+    });
+    
+    // Sembunyikan hasil saat klik di luar
+    document.addEventListener('click', function(e) {
+        if (!judulInput.contains(e.target) && !hasilDiv.contains(e.target)) {
+            hasilDiv.innerHTML = '';
+        }
     });
 
     function pilihBuku(id, judul) {

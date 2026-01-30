@@ -8,7 +8,7 @@ $query = mysqli_prepare(
     $koneksi,
     "SELECT id, judul_buku FROM buku 
      WHERE judul_buku LIKE CONCAT('%', ?, '%') 
-     LIMIT 10"
+     LIMIT 20"
 );
 mysqli_stmt_bind_param($query, "s", $keyword);
 mysqli_stmt_execute($query);

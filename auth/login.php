@@ -90,27 +90,23 @@ $judul = "Login";
                         </div>
 
                         <?php
-                        if (isset($_GET['status']) && $_GET['status'] == 'logout_sukses') {
-                            echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        if (!empty($error)) {
+                            echo '<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                                    ' . htmlspecialchars($error) . '
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                  </div>';
+                        } elseif (isset($_GET['status']) && $_GET['status'] == 'logout_sukses') {
+                            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                                     Anda berhasil logout.
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                   </div>';
-                        }
-
-                        if (isset($_GET['pesan']) && $_GET['pesan'] == 'belum_login') {
+                        } elseif (isset($_GET['pesan']) && $_GET['pesan'] == 'belum_login') {
                             echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
                                     Anda harus login terlebih dahulu.
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                   </div>';
                         }
                         ?>
-
-                        <?php if (!empty($error)): ?>
-                            <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
-                                <?= htmlspecialchars($error) ?>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        <?php endif; ?>
 
                         <form method="POST">
                             <div class="mb-3">
