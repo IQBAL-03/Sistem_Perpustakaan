@@ -98,7 +98,7 @@ require_once '../partials/header.php';
 <div class="container my-5 pt-5">
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-6">
-            <div class="card shadow border-0">
+            <div class="card shadow border-0 no-hover">
                 <div class="card-header bg-danger text-white">
                      <h5 class="mb-0">
                         <i class="bi bi-arrow-return-left"></i> Peminjaman Buku

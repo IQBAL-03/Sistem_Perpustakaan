@@ -50,7 +50,7 @@ $judul = "Login";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $judul ?> - Sistem Perpustakaan</title>
+    <title><?= $judul ?></title>
     <link rel="icon" type="image/x-icon" href="../image/icon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -62,11 +62,6 @@ $judul = "Login";
 
         .login-card {
             border-radius: 15px;
-            transition: transform 0.3s;
-        }
-
-        .login-card:hover {
-            transform: translateY(-5px);
         }
     </style>
 </head>
@@ -84,7 +79,7 @@ $judul = "Login";
         <div class="row justify-content-center">
             <div class="col-md-5 col-lg-4">
 
-                <div class="card shadow-lg border-0 login-card">
+                <div class="card shadow-lg border-0 login-card no-hover">
 
                     <div class="card-body p-4">
 

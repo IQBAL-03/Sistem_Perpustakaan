@@ -65,7 +65,7 @@ require_once '../partials/header.php';
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card shadow-sm">
+            <div class="card shadow-sm no-hover">
                 <div class="card-header bg-warning text-white">
                     <h5 class="mb-0"><i class="bi bi-pencil-square"></i> Edit Pengguna</h5>
                 </div>
@@ -105,7 +105,7 @@ require_once '../partials/header.php';
                             <select id="role" name="role" class="form-select" required>
                                 <option value="">-- Pilih Role --</option>
                                 <option value="admin" <?= $pengguna['role'] == 'admin' ? 'selected' : '' ?>>Admin</option>
-                                <option value="staff" <?= $pengguna['role'] == 'staff' ? 'selected' : '' ?>>Staff / Anggota</option>
+                                <option value="staff" <?= $pengguna['role'] == 'staff' ? 'selected' : '' ?>>Staff</option>
                             </select>
                         </div>
 

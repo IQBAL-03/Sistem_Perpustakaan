@@ -87,7 +87,7 @@ require_once '../partials/header.php';
 <div class="container my-5 pt-5">
     <div class="row w-100 justify-content-center">
         <div class="col-md-8 col-lg-6">
-            <div class="card shadow">
+            <div class="card shadow no-hover">
                 <div class="card-header bg-primary text-white">
                     <h5 class="mb-0">
                         <i class="bi bi-pencil-square"></i> Edit Data Buku

@@ -61,7 +61,7 @@ require_once '../partials/header.php';
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card shadow-sm">
+            <div class="card shadow-sm no-hover">
                 <div class="card-header bg-primary text-white">
                     <h5 class="mb-0"><i class="bi bi-person-plus"></i> Tambah Pengguna Baru</h5>
                 </div>

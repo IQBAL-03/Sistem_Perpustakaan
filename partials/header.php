@@ -19,9 +19,14 @@ if (session_status() == PHP_SESSION_NONE) {
         .card {
             transition: transform 0.2s;
         }
-        
+
         .card:hover {
             transform: translateY(-5px);
+        }
+
+        /* Class untuk menonaktifkan hover pada form tertentu */
+        .card.no-hover:hover {
+            transform: none;
         }
     </style>
 </head>
