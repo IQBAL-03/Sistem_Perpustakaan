@@ -59,9 +59,7 @@ require_once '../partials/header.php';
                             <th width="6%">Tahun</th>
                             <th width="6%">Stok</th>
                             <th width="5%">Status</th>
-                            <?php if (isset($_SESSION['user_id'])): ?>
-                                <th width="15%" class="text-center">Aksi</th>
-                            <?php endif; ?>
+                            <th width="15%" class="text-center">Aksi</th>
                         </tr>
 
                     </thead>
