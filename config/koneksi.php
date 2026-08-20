@@ -2,7 +2,7 @@
 $db_host = "localhost";
 $db_user = "root";
 $db_pass = "";
-$db_name = "db_sisperpus";
+$db_name = "[nama_database]";
 
 $koneksi = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 
